@@ -38,29 +38,20 @@ def deserialize_config_args(input: str) -> dict:
     Returns:
         dict: A single level dict of the configuration keys in dot-notation and their respective desired values
     """
-    slug_delimiter = ","
-    key_value_separator = ":"
-    _kvpairs = _split_at_delimiter(
-        input, slug_delimiter, " "
-    )  # Strip away all whitespace in input, not just leading
+    assert len(input) == 2
     runtime_modifications = {}
-    for _p in _kvpairs:
-        l, r = _split_at_delimiter(_p, key_value_separator)
-        r = r.strip()
-        if r.isdigit():
-            r = int(r)
-        elif r.lower() == "true":
-            r = True
-        elif r.lower() == "false":
-            r = False
-        runtime_modifications[l] = r
+
+    l = input[0]
+    r = input[1]
+    r = r.strip()
+    if r.isdigit():
+        r = int(r)
+    elif r.lower() == "true":
+        r = True
+    elif r.lower() == "false":
+        r = False
+    runtime_modifications[l] = r
     return runtime_modifications
-
-
-def _split_at_delimiter(
-    input: str, slug_delimiter: str, whitespace_to_strip=None
-) -> list:
-    return input.strip(whitespace_to_strip).split(slug_delimiter)
 
 
 class WrappingFormatter(argparse.RawTextHelpFormatter):
