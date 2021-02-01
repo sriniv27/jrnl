@@ -29,11 +29,13 @@ def test_override_dot_notation(minimal_config):
 
 
 def test_multiple_overrides(minimal_config):
-    overrides = {
-        "colors.title": "magenta",
-        "editor": "nano",
-        "journals.burner": "/tmp/journals/burner.jrnl",
-    }  # as returned by parse_args, saved in parser.config_override
+    overrides = [
+        {
+            "colors.title": "magenta",
+            "editor": "nano",
+            "journals.burner": "/tmp/journals/burner.jrnl",
+        }
+    ]  # as returned by parse_args, saved in parser.config_override
 
     cfg = apply_overrides(overrides, minimal_config.copy())
     assert cfg["editor"] == "nano"
