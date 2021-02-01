@@ -10,9 +10,10 @@ def apply_overrides(overrides: dict, base_config: dict) -> dict:
         dict: Updated configuration with applied overrides, in the format of the loaded configuration
     """
     config = base_config.copy()
-    for k in overrides:
+    for pairs in overrides:
+        k, v = list(pairs.items())[0]
         nodes = k.split(".")
-        config = _recursively_apply(config, nodes, overrides[k])
+        config = _recursively_apply(config, nodes, v)
     return config
 
 
