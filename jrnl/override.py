@@ -1,5 +1,4 @@
 # import logging
-def apply_overrides(overrides: dict, base_config: dict) -> dict:
     """Unpack parsed overrides in dot-notation and return the "patched" configuration
 
     Args:
