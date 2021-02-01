@@ -4,7 +4,6 @@
 import argparse
 import re
 import textwrap
-from typing import Any, Sequence, Text, Union
 
 from .commands import postconfig_decrypt
 from .commands import postconfig_encrypt

@@ -210,12 +210,12 @@ def test_version_alone():
 def test_editor_override():
 
     parsed_args = cli_as_dict('--config-override editor "nano"')
-    assert parsed_args == expected_args(config_override={"editor": "nano"})
+    assert parsed_args == expected_args(config_override=[{"editor": "nano"}])
 
 
 def test_color_override():
     assert cli_as_dict("--config-override colors.body blue") == expected_args(
-        config_override={"colors.body": "blue"}
+        config_override=[{"colors.body": "blue"}]
     )
 
 
@@ -224,11 +224,11 @@ def test_multiple_overrides():
         '--config-override colors.title green --config-override editor "nano" --config-override journal.scratchpad "/tmp/scratchpad"'
     )
     assert parsed_args == expected_args(
-        config_override={
-            "colors.title": "green",
-            "journal.scratchpad": "/tmp/scratchpad",
-            "editor": "nano",
-        }
+        config_override=[
+            {"colors.title": "green"},
+            {"editor": "nano"},
+            {"journal.scratchpad": "/tmp/scratchpad"},
+        ]
     )
 
 
