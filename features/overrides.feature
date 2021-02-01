@@ -44,7 +44,7 @@ Feature: Implementing Runtime Overrides for Select Configuration Keys
         @skip_win
         Scenario Outline: Override configured editor
         Given we use the config "tiny.yaml" 
-        When we run jrnl with --config-override editor:"<editor>"
+        When we run jrnl with --config-override editor "<editor>"
         Then the editor <editor> should have been called
         Examples: Editor Commands
         | editor            |
