@@ -36,7 +36,7 @@ def expected_args(**kwargs):
         "strict": False,
         "tags": False,
         "text": [],
-        "config_override": {},
+        "config_override": [],
     }
     return {**default_args, **kwargs}
 

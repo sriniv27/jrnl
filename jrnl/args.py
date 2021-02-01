@@ -4,6 +4,7 @@
 import argparse
 import re
 import textwrap
+from typing import Any, Sequence, Text, Union
 
 from .commands import postconfig_decrypt
 from .commands import postconfig_encrypt
@@ -40,6 +41,16 @@ def deserialize_config_args(input: list) -> dict:
         r = False
     runtime_modifications[l] = r
     return runtime_modifications
+
+
+class ConfigurationAction(argparse.Action):
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
+
+    def __call__(self, parser, namespace, values, option_strings=None) -> None:
+        cfg_overrides = getattr(namespace, self.dest, [])
+        cfg_overrides.append(deserialize_config_args(values))
+        setattr(namespace, self.dest, cfg_overrides)
 
 
 class WrappingFormatter(argparse.RawTextHelpFormatter):
@@ -346,13 +357,13 @@ def parse_args(args=[]):
     config_overrides.add_argument(
         "--config-override",
         dest="config_override",
-        action="append",
-        type=deserialize_config_args,
+        action=ConfigurationAction,
+        type=str,
         nargs=2,
-        default={},
+        default=[],
         metavar="CONFIG_KV_PAIR",
         help="""
-        Override configured key-value pair with CONFIG_KV_PAIR for this command invocation only. 
+        Override configured key-value pair with CONFIG_KV_PAIR for this command invocation only.
 
         Examples: \n
         \t - Use a different editor for this jrnl entry, call: \n
