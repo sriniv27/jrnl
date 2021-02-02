@@ -5,6 +5,7 @@
 
 import os
 import re
+from typing import Any, Union
 import unicodedata
 
 from jrnl.color import ERROR_COLOR
@@ -82,5 +83,5 @@ class TextExporter:
 class PrettyExporter(TextExporter):
     names = ["pretty"]
     @classmethod
-    def export_entry(cls, entry: Entry): 
+    def export_entry(cls, entry: Entry) -> Union[str,Any]: 
         return entry.pprint()
