@@ -45,7 +45,7 @@ def editor_override(context, editor=None):
         editor = config["editor"]
         journal = "features/journals/journal.jrnl"
         context.tmpfile = journal
-        print("%s has been launched" % editor)
+        print("%s was called" % editor)
         return journal
 
     if "password" in context:
@@ -55,7 +55,7 @@ def editor_override(context, editor=None):
     # fmt: off
     # see: https://github.com/psf/black/issues/664
     with \
-        mock.patch("jrnl.jrnl._write_in_editor", side_effect=_mock_write_in_editor(context.jrnl_config)) as mock_write_in_editor, \
+        mock.patch("jrnl.jrnl._write_in_editor", side_effect=_mock_write_in_editor) as mock_write_in_editor, \
         mock.patch("sys.stdin.isatty", return_value=True), \
         mock.patch('getpass.getpass',side_effect=_mock_getpass(password)), \
         mock.patch("jrnl.time.parse", side_effect = _mock_time_parse(context)), \
