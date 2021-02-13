@@ -52,11 +52,11 @@ Feature: Implementing Runtime Overrides for Select Configuration Keys
         And the runtime config should have editor set to nano
 
 
-        @skip_win
+        
         Scenario Outline: Override configured editor
         Given we use the config "basic_encrypted.yaml"
         And we use the password "test" if prompted 
-        When we run "jrnl --config-override editor '<editor>'"
+        When we run "jrnl --config-override editor <editor>"
         Then the editor <editor> should have been called
         Examples: Editor Commands
         | editor            |
