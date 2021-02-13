@@ -43,7 +43,7 @@ Feature: Implementing Runtime Overrides for Select Configuration Keys
         When we run "jrnl -1 --config-override colors.body blue"
         Then the runtime config should have colors.body set to blue
 
-        @skip_win 
+        
         Scenario: Apply multiple config overrides 
         Given we use the config "basic_encrypted.yaml"
         And we use the password "test" if prompted 
