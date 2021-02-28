@@ -10,7 +10,7 @@ on:
     - 'poetry.lock'
     - 'pyproject.toml'
   pull_request:
-    branches: [ develop ]
+    branches: [ develop, lockfile-merge ]
     paths:
     - 'jrnl/**'
     - 'features/**'
